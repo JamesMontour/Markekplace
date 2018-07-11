@@ -1,6 +1,4 @@
 exports.run = (client, msg, args) => {
-    var amount = msg.content.split(' ').pop();
-    var author = msg.author;
     var authStr = author.toString();
     var logChannel = msg.guild.channels.find('name', 'discord-economics');
     
