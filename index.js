@@ -18,27 +18,19 @@ client.on('message', msg => {
         if (msg.author.bot) return;
 
         if (msg.content.match(/(cough|c o u g h|c\.o\.u\.g\.h)/gi)) {
-                msg.react("😷")
-                        .then(console.log)
-                        .catch(console.error);
+                msg.react("😷").then(console.log).catch(console.error);
         }
 
         if (msg.content.match(/(sips tea|s i p s  t e a|sip.s tea)/gi)) {
-                msg.react("🍵")
-                        .then(console.log)
-                        .catch(console.error);
+                msg.react("🍵").then(console.log).catch(console.error);
         }
 
         if (msg.content.match(/(sips ass|s i p s  a s s|sip.s ass)/gi)) {
-                msg.react("💩")
-                        .then(console.log)
-                        .catch(console.error);
+                msg.react("💩").then(console.log).catch(console.error);
         }
 
         /*if (msg.content.match(/hell/gi)) {
-                msg.react("379122886935445526")
-                        .then(console.log)
-                        .catch(console.error);
+                msg.react("379122886935445526").then(console.log).catch(console.error);
         }*/
         if (msg.content == "but do you eat ass") {
                 msg.channel.send('**E**xpect\n**A**ngsty\n**T**eens to\n\n**A**gree with\n**S**ocial\n**S**tandards?');
@@ -86,17 +78,13 @@ client.on('message', msg => {
                 logChannel.send('User ' + authStr + ' sent credits to Chef at ' + msg.createdAt + '. Amount Sent: ' + amount)
                         .then(console.log)
                         .catch(console.error);
-                msg.react("💴")
-                        .then(console.log)
-                        .catch(console.error);
+                msg.react("💴").then(console.log).catch(console.error);
         } else if (msg.author.id === '[redacted]' && (msg.content.includes('->transfer') || msg.content.includes('~>transfer')) && msg.content.endsWith(amount)) {
                 // Log the transaction in logChannel
                 logChannel.send('Chef sent credits to a member at ' + msg.createdAt + '. Command Log: \`' + msg.content + '\`.')
                         .then(console.log)
                         .catch(console.error);
-                msg.react("💴")
-                        .then(console.log)
-                        .catch(console.error);
+                msg.react("💴").then(console.log).catch(console.error);
         } else { return; }
 });
 
