@@ -5,7 +5,7 @@ const config = require('./config.json');
 client.on('ready', () => {
     console.log('We out here fam...');
     client.user.setActivity("use me, senpai %");
-    //client.user.setUsername("Markek")
+    //client.user.setUsername("Markekplace")
 });
 
 // Event Listener - Messages
@@ -18,7 +18,7 @@ client.on('message', msg => {
     var authStr = author.toString();
     var logChannel = msg.guild.channels.find('name', 'discord-economics');
 
-    // Prevent the bot from messaging itself and causing a rip in time
+    // Prevent the bot from interacting with itself/other bots and causing a rip in time
         if (msg.author.bot) return;
 
     // Run commands
@@ -31,7 +31,7 @@ client.on('message', msg => {
                 console.error(err);
             }
         }
-
+        
     // Auto-Reacts
         if (msg.isMentioned("442134380845203478")) {
             msg.react("438088563452805121").then(console.log).catch(console.error);
@@ -73,8 +73,6 @@ client.on('message', msg => {
             logChannel.send("Chef sent credits to a member at " + msg.createdAt + ". Command Log: \`" + msg.content + "\`.").then(console.log).catch(console.error);
             msg.react("💴").then(console.log).catch(console.error);
         } else { return; }
-
-    
 });
 
 client.login(config.token);
