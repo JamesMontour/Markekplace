@@ -1,11 +1,31 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const fs = require("fs");
 const config = require('./config.json');
+
+const RC = require('reaction-core');
+const handler = new RC.Handler();
 
 client.on('ready', () => {
     console.log('We out here fam...');
     client.user.setActivity("use me, senpai %");
     //client.user.setUsername("Markekplace")
+});
+
+/*// Event Listener - Reactions
+client.on('messageReactionAdd', (messageReaction, user) => handler.handle(messageReaction, user));
+const roleMenu = require('./roleMenu.js');
+let assignRole = new RC.Menu(roleMenu.embed, roleMenu.buttons);
+handler.addMenus(assignRole);*/
+
+// Events
+fs.readdir("./events/", (err, files) => {
+    if (err) return console.error(err);
+    files.forEach(file => {
+        let eventFunction = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+        client.on(eventName, (...args) => eventFunction.run(client, ...args));
+    });
 });
 
 // Event Listener - Messages
@@ -20,6 +40,9 @@ client.on('message', msg => {
 
     // Prevent the bot from interacting with itself/other bots and causing a rip in time
         if (msg.author.bot) return;
+       /*if (msg.content === "rc%testmenu"){
+            msg.channel.sendMenu(assignRole);
+        }*/
 
     // Run commands
         if (msg.content.startsWith(config.prefix)) {
@@ -45,8 +68,20 @@ client.on('message', msg => {
             msg.react("🍵").then(console.log).catch(console.error);
         }
 
-        if (msg.content.match(/(sips ass|s i p s  a s s|sip.s ass)/gi)) {
+        if (msg.content.match(/(sips ass|s i p s  a s s|sip.s ass|sips.*ass|sip.s.*ass)/gi)) {
             msg.react("💩").then(console.log).catch(console.error);
+        }
+
+        if (msg.content.match(/(sips lemonade|s i p s  l e m o n a d e|sip.s lemonade|sips.*lemonade|sip.s.*lemonade)/gi)) {
+            msg.react("🍋").then(console.log).catch(console.error);
+            msg.react("🍹").then(console.log).catch(console.error);
+        }
+
+        if (msg.author.id == "124163151238266880") {
+            msg.react("🇾").then(console.log).catch(console.error);
+            var i = 0;
+            while (i < 15) {i++}
+            msg.react("🇪").then(console.log).catch(console.error);
         }
 
         /*if (msg.content.match(/hell/gi)) {
@@ -54,13 +89,17 @@ client.on('message', msg => {
         }*/
 
     // Auto-responders
-        if (msg.content == "but do you eat ass" && msg.author.id == config.ownerID) {
+        if (msg.content == "but do you eat ass" && (msg.author.id == config.ownerID || msg.author.id == "235815143643152385")) {
             msg.channel.send("**E**xpect\n**A**ngsty\n**T**eens to\n\n**A**gree with\n**S**ocial\n**S**tandards?");
         }
 
     // % commands
         if (msg.content == config.prefix) {
-            msg.channel.send('bruh you gotta tell me what to do\n (lowkey all i can do rn is %market, maybe even a bit of %help).');
+            msg.channel.send({embed: {
+                color: 0xff0000,
+                title: "Bruh.",
+                description: "You have to tell me what to do!\n\n(Lowkey, all I can do is %market, maybe even a bit of %help... There might be some other ones but I can't remember)."
+            }}).then(console.log).catch(console.error);
         }
 
     // Mantaro Credit Transfer Logging

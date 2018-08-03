@@ -7,6 +7,9 @@ exports.run = (client, msg, args) => {
     delete require.cache[require.resolve(`./${args[0]}.js`)];
     msg.reply(`The command \`${args[0]}\` has been reloaded`);
   } else {
-    msg.channel.send('You do not have permission to use this command!');
+    msg.channel.send({embed: {
+      color: 0xaa0000,
+      description: "You do not have permission to use this command!"
+    }}).then(console.log).catch(console.error);
   }
 };
