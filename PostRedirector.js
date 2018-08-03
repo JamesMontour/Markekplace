@@ -12,12 +12,6 @@ client.on('ready', () => {
     //client.user.setUsername("Markekplace")
 });
 
-/*// Event Listener - Reactions
-client.on('messageReactionAdd', (messageReaction, user) => handler.handle(messageReaction, user));
-const roleMenu = require('./roleMenu.js');
-let assignRole = new RC.Menu(roleMenu.embed, roleMenu.buttons);
-handler.addMenus(assignRole);*/
-
 // Events
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
@@ -40,9 +34,6 @@ client.on('message', msg => {
 
     // Prevent the bot from interacting with itself/other bots and causing a rip in time
         if (msg.author.bot) return;
-       /*if (msg.content === "rc%testmenu"){
-            msg.channel.sendMenu(assignRole);
-        }*/
 
     // Run commands
         if (msg.content.startsWith(config.prefix)) {
@@ -83,10 +74,6 @@ client.on('message', msg => {
             while (i < 15) {i++}
             msg.react("🇪").then(console.log).catch(console.error);
         }
-
-        /*if (msg.content.match(/hell/gi)) {
-            msg.react("379122886935445526").then(console.log).catch(console.error);
-        }*/
 
     // Auto-responders
         if (msg.content == "but do you eat ass" && (msg.author.id == config.ownerID || msg.author.id == "235815143643152385")) {
