@@ -1,5 +1,4 @@
 exports.run = (client, msg, args) => {
-    //msg.channel.send('idk how to even help myself tbh');
     msg.channel.send({embed: {
         color: 0x6688dd,
         title: "Markekplace Help Menu",
